@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
   # Template Selection with Preview
 
@@ -9,3 +10,6 @@
 
   Run `npm run dev` to start the development server.
   
+=======
+# resume-builder-app
+>>>>>>> bfd61bc6f6efcc7799ca42d1876916f12483ce81
