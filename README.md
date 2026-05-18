@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
   # Resume Builder App
 
   ## Running the code
