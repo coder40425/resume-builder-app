@@ -212,7 +212,7 @@ function BuilderContent() {
               </div>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );

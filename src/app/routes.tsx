@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
   {
     path: "/templates",
     Component: TemplatesPage,
-  },
+  }, 
   {
     path: "/builder/:templateId",
     Component: BuilderPage,

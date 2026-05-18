@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { FileText, Download, Eye, Zap, Shield, Layout, ArrowRight, CheckCircle } from "lucide-react";
-import logo from "../data/logo-skilldzire.png";
+import logo from "../data/logo-skilldzire.png"; 
 
 export function LandingPage() {
   return (
