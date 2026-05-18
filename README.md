@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-
-  # Template Selection with Preview
-
-  This is a code bundle for Template Selection with Preview. The original project is available at https://www.figma.com/design/6NELWF5MmvzFrF91CJYfmJ/Template-Selection-with-Preview.
+  # Resume Builder App
 
   ## Running the code
 
