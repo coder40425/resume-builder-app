@@ -181,15 +181,13 @@ function ExperienceSection() {
     <Section title="Work Experience" icon={<Briefcase className="w-5 h-5" />}>
       {resumeData.experience.map((exp, index) => (
         <div key={exp.id} className="p-4 border border-gray-200 rounded-lg space-y-4 relative">
-          {resumeData.experience.length > 1 && (
-            <button
-              onClick={() => removeExperience(index)}
-              className="absolute top-2 right-2 p-1 hover:bg-red-50 text-red-600 rounded transition-colors"
-              title="Remove"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
-          )}
+          <button
+            onClick={() => removeExperience(index)}
+            className="absolute top-2 right-2 p-1 hover:bg-red-50 text-red-600 rounded transition-colors"
+            title="Remove"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
           <div className="grid md:grid-cols-2 gap-4">
             <Input
               label="Job Title"

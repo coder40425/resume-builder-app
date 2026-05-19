@@ -19,93 +19,6 @@ export function TemplatesPage() {
           box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        .tpl-nav-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 24px;
-          height: 62px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .brand-link {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          text-decoration: none;
-        }
-
-        .brand-divider {
-          width: 1px;
-          height: 18px;
-          background: #e5e7eb;
-          margin: 0 2px;
-        }
-
-        .brand-label {
-          font-weight: 700;
-          font-size: 0.9rem;
-          color: #111827;
-        }
-
-        .back-link {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          color: #6b7280;
-          font-size: 0.85rem;
-          font-weight: 500;
-          text-decoration: none;
-          padding: 7px 14px;
-          border-radius: 8px;
-          border: 1px solid #e5e7eb;
-          transition: all 0.15s;
-          background: white;
-        }
-        .back-link:hover {
-          color: #ea580c;
-          border-color: #fed7aa;
-          background: #fff7ed;
-        }
-
-        .tpl-header {
-          background: white;
-          border-bottom: 1px solid #f3f4f6;
-          padding: 52px 24px 44px;
-          text-align: center;
-        }
-
-        .tpl-header-inner {
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .header-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: #fff7ed;
-          border: 1px solid #fed7aa;
-          color: #c2410c;
-          padding: 5px 14px;
-          border-radius: 100px;
-          font-size: 0.72rem;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          margin-bottom: 18px;
-        }
-
-        .tpl-grid {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 48px 24px 72px;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-        }
-
         .tpl-card {
           background: white;
           border-radius: 16px;
@@ -122,12 +35,6 @@ export function TemplatesPage() {
           transform: translateY(-5px);
         }
 
-        .tpl-preview-wrap {
-          position: relative;
-          overflow: hidden;
-          border-bottom: 1px solid #f3f4f6;
-        }
-
         .tpl-hover-overlay {
           position: absolute;
           inset: 0;
@@ -136,7 +43,7 @@ export function TemplatesPage() {
           transition: opacity 0.2s;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-center;
         }
         .tpl-card:hover .tpl-hover-overlay { opacity: 1; }
 
@@ -157,21 +64,8 @@ export function TemplatesPage() {
         }
         .tpl-card:hover .preview-btn { transform: translateY(0); }
 
-        .ats-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          background: #f0fdf4;
-          border: 1px solid #bbf7d0;
-          color: #15803d;
-          font-size: 0.7rem;
-          font-weight: 700;
-          padding: 3px 9px;
-          border-radius: 100px;
-        }
-
         .use-btn {
-          display: block;
+          display: flex;
           width: 100%;
           background: linear-gradient(135deg, #ea580c, #f97316);
           color: white;
@@ -180,13 +74,11 @@ export function TemplatesPage() {
           padding: 10px 0;
           font-size: 0.875rem;
           font-weight: 600;
-          font-family: 'Inter', sans-serif;
           text-align: center;
           text-decoration: none;
           cursor: pointer;
           transition: all 0.2s;
           box-shadow: 0 3px 10px rgba(234,88,12,0.25);
-          display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
@@ -199,38 +91,41 @@ export function TemplatesPage() {
 
       {/* ── Navbar ── */}
       <nav className="tpl-nav">
-        <div className="tpl-nav-inner">
-          <Link to="/" className="brand-link">
-            <img src={logo} alt="SkillDzire" style={{ height: 40, width: "auto", objectFit: "contain" }} />
-            <div className="brand-divider" />
-            <span className="brand-label">Resume Builder</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 no-underline">
+            <img src={logo} alt="SkillDzire" className="h-8 sm:h-10 w-auto object-contain" />
+            <div className="hidden sm:block w-px h-5 bg-gray-200" />
+            <span className="hidden sm:inline font-bold text-sm sm:text-base text-gray-900">Resume Builder</span>
           </Link>
-          <Link to="/" className="back-link">
-            <ArrowLeft size={13} /> Back to Home
+          <Link to="/" className="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-colors px-3 py-2 rounded-lg border border-gray-200 text-xs sm:text-sm font-medium no-underline">
+            <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="hidden sm:inline">Back to</span> Home
           </Link>
         </div>
       </nav>
 
       {/* ── Header ── */}
-      <div className="tpl-header">
-        <div className="tpl-header-inner">
-          <div className="header-badge">
+      <div className="bg-white border-b border-gray-200 py-8 sm:py-12 md:py-14">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          <div className="inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 text-orange-800 px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4">
             <Check size={11} /> 6 ATS-Optimized Templates
           </div>
-          <h1 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 800, color: "#111827", letterSpacing: "-0.025em", marginBottom: 12, lineHeight: 1.15 }}>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
             Choose Your Resume Template
           </h1>
-          <p style={{ color: "#6b7280", fontSize: "1rem", lineHeight: 1.65 }}>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
             Select a professional template and start building your resume instantly — with pre-filled sample data to guide you.
           </p>
         </div>
       </div>
 
       {/* ── Templates Grid ── */}
-      <div className="tpl-grid">
-        {templates.map((template) => (
-          <TemplateCard key={template.id} template={template} />
-        ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+          {templates.map((template) => (
+            <TemplateCard key={template.id} template={template} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -240,8 +135,8 @@ function TemplateCard({ template }: { template: any }) {
   return (
     <div className="tpl-card">
       {/* Preview */}
-      <Link to={`/builder/${template.id}`} className="tpl-preview-wrap" style={{ display: "block" }}>
-        <div style={{ aspectRatio: "8.5/11", background: "white" }}>
+      <Link to={`/builder/${template.id}`} className="relative block overflow-hidden border-b border-gray-100" style={{ textDecoration: "none" }}>
+        <div className="aspect-[8.5/11] bg-white">
           <TemplatePreview templateId={template.id} />
         </div>
         <div className="tpl-hover-overlay">
@@ -252,12 +147,16 @@ function TemplateCard({ template }: { template: any }) {
       </Link>
 
       {/* Info */}
-      <div style={{ padding: "20px 20px 22px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <h3 style={{ fontWeight: 700, fontSize: "1rem", color: "#111827" }}>{template.name}</h3>
-          {template.atsOptimized && <span className="ats-badge"><Check size={9} /> ATS</span>}
+      <div className="p-4 sm:p-5 flex flex-col gap-3 flex-1">
+        <div className="flex items-center justify-between">
+          <h3 className="font-bold text-sm sm:text-base text-gray-900">{template.name}</h3>
+          {template.atsOptimized && (
+            <span className="inline-flex items-center gap-1 bg-green-50 border border-green-200 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full">
+              <Check size={9} /> ATS
+            </span>
+          )}
         </div>
-        <p style={{ color: "#6b7280", fontSize: "0.82rem", lineHeight: 1.6, flex: 1 }}>{template.description}</p>
+        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed flex-1">{template.description}</p>
         <Link to={`/builder/${template.id}`} className="use-btn">
           Use Template <ArrowRight size={14} />
         </Link>
@@ -276,7 +175,7 @@ function TemplatePreview({ templateId }: { templateId: string }) {
     "creative-clean": <CreativeCleanPreview />,
   };
   return (
-    <div style={{ width: "100%", height: "100%", padding: 24, overflow: "hidden" }}>
+    <div className="w-full h-full overflow-hidden bg-white">
       {previewStyles[templateId] || <DefaultPreview />}
     </div>
   );
@@ -284,23 +183,57 @@ function TemplatePreview({ templateId }: { templateId: string }) {
 
 function ModernProfessionalPreview() {
   return (
-    <div style={{ width: "100%", height: "100%", background: "white", display: "flex", gap: 8, fontSize: 4 }}>
-      <div style={{ width: "35%", background: "#1e293b", padding: 8, display: "flex", flexDirection: "column", gap: 4 }}>
-        <div style={{ width: 28, height: 28, background: "#475569", borderRadius: "50%", margin: "0 auto 4px" }} />
-        <div style={{ height: 4, background: "#64748b", borderRadius: 2, width: "80%", margin: "0 auto" }} />
-        <div style={{ height: 3, background: "#475569", borderRadius: 2, width: "60%", margin: "0 auto" }} />
-        <div style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 2 }}>
-          {[100, 85, 70, 90].map((w, i) => <div key={i} style={{ height: 2, background: "#475569", borderRadius: 1, width: `${w}%` }} />)}
+    <div className="w-full h-full bg-white flex">
+      {/* Sidebar */}
+      <div className="w-2/5 bg-slate-800 p-3 flex flex-col gap-2">
+        <div className="w-12 h-12 bg-slate-600 rounded-full mx-auto mt-2 mb-1" />
+        <div className="h-2 bg-slate-500 rounded w-3/4 mx-auto" />
+        <div className="h-1.5 bg-slate-600 rounded w-2/3 mx-auto" />
+        <div className="mt-3 space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-2/3" />
+          <div className="h-1 bg-slate-600 rounded" />
+          <div className="h-1 bg-slate-600 rounded w-5/6" />
+          <div className="h-1 bg-slate-600 rounded w-4/6" />
+        </div>
+        <div className="mt-3 space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-2/3" />
+          <div className="h-1 bg-slate-600 rounded w-full" />
+          <div className="h-1 bg-slate-600 rounded w-5/6" />
+        </div>
+        <div className="mt-3 space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-1/2" />
+          <div className="flex flex-wrap gap-1">
+            <div className="h-2 bg-slate-600 rounded px-2 w-8" />
+            <div className="h-2 bg-slate-600 rounded px-2 w-6" />
+            <div className="h-2 bg-slate-600 rounded px-2 w-10" />
+          </div>
         </div>
       </div>
-      <div style={{ flex: 1, padding: 8, display: "flex", flexDirection: "column", gap: 6 }}>
-        <div style={{ height: 4, background: "#f97316", borderRadius: 2, width: "45%" }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          {[100, 88, 72, 94, 60].map((w, i) => <div key={i} style={{ height: 2, background: "#e5e7eb", borderRadius: 1, width: `${w}%` }} />)}
+      {/* Main */}
+      <div className="flex-1 p-3 flex flex-col gap-3">
+        <div className="space-y-1">
+          <div className="h-2.5 bg-gray-800 rounded w-3/4" />
+          <div className="h-1.5 bg-orange-500 rounded w-1/2" />
+          <div className="h-1 bg-gray-300 rounded w-2/3" />
         </div>
-        <div style={{ height: 4, background: "#f97316", borderRadius: 2, width: "40%" }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          {[100, 80, 65].map((w, i) => <div key={i} style={{ height: 2, background: "#e5e7eb", borderRadius: 1, width: `${w}%` }} />)}
+        <div className="space-y-1">
+          <div className="h-1.5 bg-gray-700 rounded w-1/3 border-b border-orange-400 pb-0.5" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-11/12" />
+          <div className="h-1 bg-gray-200 rounded w-4/5" />
+        </div>
+        <div className="space-y-1">
+          <div className="h-1.5 bg-gray-700 rounded w-1/3" />
+          <div className="h-1 bg-gray-200 rounded w-3/4" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-5/6" />
+          <div className="h-1 bg-gray-200 rounded w-4/5" />
+        </div>
+        <div className="space-y-1">
+          <div className="h-1.5 bg-gray-700 rounded w-1/3" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-11/12" />
+          <div className="h-1 bg-gray-200 rounded w-3/4" />
         </div>
       </div>
     </div>
@@ -309,15 +242,19 @@ function ModernProfessionalPreview() {
 
 function ATSClassicPreview() {
   return (
-    <div style={{ width: "100%", height: "100%", background: "white", padding: 10, display: "flex", flexDirection: "column", gap: 6 }}>
-      <div style={{ textAlign: "center", borderBottom: "1px solid #d1d5db", paddingBottom: 6 }}>
-        <div style={{ height: 6, background: "#111827", borderRadius: 2, width: "40%", margin: "0 auto 3px" }} />
-        <div style={{ height: 3, background: "#9ca3af", borderRadius: 2, width: "55%", margin: "0 auto" }} />
+    <div className="w-full h-full bg-white p-4 flex flex-col gap-3">
+      <div className="text-center border-b-2 border-gray-800 pb-3">
+        <div className="h-3 bg-gray-800 rounded w-1/2 mx-auto mb-1.5" />
+        <div className="h-1.5 bg-gray-500 rounded w-2/3 mx-auto mb-1" />
+        <div className="h-1 bg-gray-400 rounded w-1/2 mx-auto" />
       </div>
-      {[["30%", "#374151"], ["40%", "#374151"], ["35%", "#374151"]].map(([w, c], i) => (
-        <div key={i} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <div style={{ height: 3, background: c, borderRadius: 2, width: w }} />
-          {[100, 88, 75].map((pw, j) => <div key={j} style={{ height: 2, background: "#e5e7eb", borderRadius: 1, width: `${pw}%` }} />)}
+      {["EXPERIENCE", "EDUCATION", "SKILLS"].map((section) => (
+        <div key={section} className="space-y-1.5">
+          <div className="h-1.5 bg-gray-800 rounded w-1/3 border-b border-gray-400 pb-0.5" />
+          <div className="h-1 bg-gray-300 rounded" />
+          <div className="h-1 bg-gray-300 rounded w-11/12" />
+          <div className="h-1 bg-gray-300 rounded w-4/5" />
+          <div className="h-1 bg-gray-300 rounded w-5/6" />
         </div>
       ))}
     </div>
@@ -326,15 +263,19 @@ function ATSClassicPreview() {
 
 function MinimalElegantPreview() {
   return (
-    <div style={{ width: "100%", height: "100%", background: "white", padding: 12, display: "flex", flexDirection: "column", gap: 8 }}>
-      <div style={{ textAlign: "center", paddingBottom: 6, borderBottom: "1px solid #f3f4f6" }}>
-        <div style={{ height: 7, background: "#111827", borderRadius: 2, width: "38%", margin: "0 auto 4px" }} />
-        <div style={{ height: 2.5, background: "#9ca3af", borderRadius: 2, width: "50%", margin: "0 auto" }} />
+    <div className="w-full h-full bg-white p-4 flex flex-col gap-3">
+      <div className="text-center pb-3" style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <div className="h-3 bg-gray-900 rounded w-2/5 mx-auto mb-1.5" />
+        <div className="h-1.5 bg-gray-500 rounded w-1/3 mx-auto mb-1" />
+        <div className="h-1 bg-gray-400 rounded w-1/2 mx-auto" />
       </div>
       {[1, 2, 3].map((i) => (
-        <div key={i} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <div style={{ height: 2.5, background: "#374151", borderRadius: 1, width: "25%" }} />
-          {[100, 88].map((w, j) => <div key={j} style={{ height: 2, background: "#f3f4f6", borderRadius: 1, width: `${w}%` }} />)}
+        <div key={i} className="space-y-1.5">
+          <div className="h-1.5 bg-gray-800 rounded w-1/4" />
+          <div style={{ height: 1, background: "#e5e7eb" }} />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-11/12" />
+          <div className="h-1 bg-gray-200 rounded w-4/5" />
         </div>
       ))}
     </div>
@@ -343,20 +284,28 @@ function MinimalElegantPreview() {
 
 function DeveloperResumePreview() {
   return (
-    <div style={{ width: "100%", height: "100%", background: "white", padding: 10, display: "flex", flexDirection: "column", gap: 6 }}>
-      <div style={{ borderBottom: "2px solid #3b82f6", paddingBottom: 5 }}>
-        <div style={{ height: 6, background: "#111827", borderRadius: 2, width: "38%", marginBottom: 3 }} />
-        <div style={{ height: 2.5, background: "#6b7280", borderRadius: 1, width: "55%" }} />
+    <div className="w-full h-full bg-white p-4 flex flex-col gap-3">
+      <div style={{ borderBottom: "2px solid #3b82f6" }} className="pb-2">
+        <div className="h-3 bg-gray-900 rounded w-2/5 mb-1.5" />
+        <div className="h-1.5 bg-blue-500 rounded w-1/3 mb-1" />
+        <div className="h-1 bg-gray-400 rounded w-1/2" />
       </div>
-      <div style={{ display: "flex", gap: 8 }}>
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
-          <div style={{ height: 3, background: "#3b82f6", borderRadius: 1, width: "40%" }} />
-          {[100, 85, 70].map((w, i) => <div key={i} style={{ height: 2, background: "#e5e7eb", borderRadius: 1, width: `${w}%` }} />)}
+      <div className="flex gap-3">
+        <div className="flex-1 space-y-1.5">
+          <div className="h-1.5 bg-blue-500 rounded w-1/3" />
+          <div className="h-1 bg-gray-300 rounded" />
+          <div className="h-1 bg-gray-300 rounded w-5/6" />
+          <div className="h-1 bg-gray-300 rounded w-4/5" />
+          <div className="h-1.5 bg-blue-500 rounded w-1/3 mt-2" />
+          <div className="h-1 bg-gray-300 rounded" />
+          <div className="h-1 bg-gray-300 rounded w-11/12" />
         </div>
-        <div style={{ width: "32%", display: "flex", flexDirection: "column", gap: 2 }}>
-          <div style={{ height: 3, background: "#3b82f6", borderRadius: 1, width: "70%" }} />
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-            {[60, 75, 50, 80, 65].map((w, i) => <div key={i} style={{ height: 5, background: "#dbeafe", borderRadius: 2, width: `${w}%` }} />)}
+        <div className="w-1/3 space-y-1.5">
+          <div className="h-1.5 bg-blue-500 rounded w-2/3" />
+          <div className="flex flex-wrap gap-1">
+            {[8, 10, 7, 12, 9, 8].map((w, i) => (
+              <div key={i} className="h-2 bg-blue-100 border border-blue-200 rounded" style={{ width: `${w * 4}px` }} />
+            ))}
           </div>
         </div>
       </div>
@@ -366,16 +315,21 @@ function DeveloperResumePreview() {
 
 function CorporatePreview() {
   return (
-    <div style={{ width: "100%", height: "100%", background: "white", display: "flex", flexDirection: "column", gap: 0 }}>
-      <div style={{ background: "#1f2937", padding: "10px 10px 8px" }}>
-        <div style={{ height: 5, background: "white", borderRadius: 2, width: "38%", marginBottom: 3 }} />
-        <div style={{ height: 2.5, background: "#9ca3af", borderRadius: 1, width: "55%" }} />
+    <div className="w-full h-full bg-white flex flex-col">
+      <div className="bg-gray-800 px-4 py-3">
+        <div className="h-3 bg-white rounded w-2/5 mb-1.5" />
+        <div className="h-1.5 bg-gray-400 rounded w-1/3 mb-1" />
+        <div className="h-1 bg-gray-500 rounded w-1/2" />
       </div>
-      <div style={{ padding: 10, display: "flex", flexDirection: "column", gap: 5 }}>
+      <div className="flex-1 p-4 flex flex-col gap-3">
         {[1, 2, 3].map((i) => (
-          <div key={i} style={{ background: "#f9fafb", borderRadius: 4, padding: "4px 6px", display: "flex", flexDirection: "column", gap: 2 }}>
-            <div style={{ height: 3, background: "#374151", borderRadius: 1, width: "30%" }} />
-            {[100, 82].map((w, j) => <div key={j} style={{ height: 2, background: "#d1d5db", borderRadius: 1, width: `${w}%` }} />)}
+          <div key={i} className="space-y-1.5">
+            <div className="h-1.5 bg-gray-800 rounded w-1/3" />
+            <div className="bg-gray-50 border border-gray-200 rounded p-1.5 space-y-1">
+              <div className="h-1 bg-gray-400 rounded w-3/4" />
+              <div className="h-1 bg-gray-300 rounded" />
+              <div className="h-1 bg-gray-300 rounded w-5/6" />
+            </div>
           </div>
         ))}
       </div>
@@ -385,18 +339,21 @@ function CorporatePreview() {
 
 function CreativeCleanPreview() {
   return (
-    <div style={{ width: "100%", height: "100%", background: "white", padding: 10, display: "flex", flexDirection: "column", gap: 6 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, borderBottom: "2px solid #fed7aa", paddingBottom: 6 }}>
-        <div style={{ width: 22, height: 22, background: "linear-gradient(135deg,#f97316,#ea580c)", borderRadius: 4, flexShrink: 0 }} />
-        <div>
-          <div style={{ height: 5, background: "#111827", borderRadius: 2, width: 70, marginBottom: 2 }} />
-          <div style={{ height: 2.5, background: "#9ca3af", borderRadius: 1, width: 50 }} />
+    <div className="w-full h-full bg-white p-4 flex flex-col gap-3">
+      <div className="flex items-start gap-3 pb-3" style={{ borderBottom: "2px solid #f97316" }}>
+        <div className="w-14 h-14 rounded-lg flex-shrink-0" style={{ background: "linear-gradient(135deg, #ea580c, #f97316)" }} />
+        <div className="flex-1 space-y-1">
+          <div className="h-3 bg-gray-900 rounded w-3/4" />
+          <div className="h-1.5 bg-orange-500 rounded w-1/2" />
+          <div className="h-1 bg-gray-400 rounded w-2/3" />
         </div>
       </div>
-      {[1, 2].map((i) => (
-        <div key={i} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <div style={{ height: 3, background: "#f97316", borderRadius: 1, width: "30%" }} />
-          {[100, 85, 70].map((w, j) => <div key={j} style={{ height: 2, background: "#f3f4f6", borderRadius: 1, width: `${w}%` }} />)}
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-1/4" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-11/12" />
+          <div className="h-1 bg-gray-200 rounded w-4/5" />
         </div>
       ))}
     </div>
@@ -405,8 +362,8 @@ function CreativeCleanPreview() {
 
 function DefaultPreview() {
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <FileText style={{ width: 48, height: 48, color: "#d1d5db" }} />
+    <div className="w-full h-full bg-white p-4 flex items-center justify-center">
+      <FileText className="w-16 h-16 text-gray-300" />
     </div>
   );
 }

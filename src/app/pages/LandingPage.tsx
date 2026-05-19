@@ -1,8 +1,11 @@
 import { Link } from "react-router";
-import { FileText, Download, Eye, Zap, Shield, Layout, ArrowRight, CheckCircle } from "lucide-react";
-import logo from "../data/logo-skilldzire.png"; 
+import { FileText, Download, Eye, Zap, Shield, Layout, ArrowRight, CheckCircle, Menu, X } from "lucide-react";
+import { useState } from "react";
+import logo from "../data/logo-skilldzire.png";
 
 export function LandingPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "'Inter', sans-serif" }}>
       <style>{`
@@ -184,48 +187,76 @@ export function LandingPage() {
           <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             {/* Logo */}
             <Link to="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-              <img src={logo} alt="SkillDzire" style={{ height: 40, width: "auto", objectFit: "contain" }} />
-              <div style={{ width: 1, height: 20, background: "#e5e7eb", margin: "0 4px" }} />
-              <span style={{ fontWeight: 700, fontSize: "0.95rem", color: "#111827" }}>Resume Builder</span>
+              <img src={logo} alt="SkillDzire" className="h-8 sm:h-10 w-auto object-contain" />
+              <div className="hidden sm:block" style={{ width: 1, height: 20, background: "#e5e7eb", margin: "0 4px" }} />
+              <span className="hidden sm:inline" style={{ fontWeight: 700, fontSize: "0.95rem", color: "#111827" }}>Resume Builder</span>
             </Link>
 
-            <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="nav-link">Features</a>
               <Link to="/templates" className="nav-link">Templates</Link>
               <a href="#about" className="nav-link">About</a>
             </div>
 
-            <Link to="/templates" className="btn-primary" style={{ padding: "9px 20px", fontSize: "0.85rem" }}>
-              Build Resume <ArrowRight size={14} />
-            </Link>
+            {/* CTA + Mobile Menu */}
+            <div className="flex items-center gap-3">
+              <Link to="/templates" className="btn-primary hidden sm:inline-flex" style={{ padding: "9px 20px", fontSize: "0.85rem" }}>
+                <span className="hidden sm:inline">Build Resume</span>
+                <span className="sm:hidden">Start</span>
+                <ArrowRight size={14} />
+              </Link>
+
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Menu Dropdown */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 bg-white">
+              <div className="px-4 py-4 space-y-3">
+                <a href="#features" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>Features</a>
+                <Link to="/templates" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>Templates</Link>
+                <a href="#about" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>About</a>
+                <Link to="/templates" className="btn-primary sm:hidden w-full justify-center" onClick={() => setMobileMenuOpen(false)}>
+                  Build Resume <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          )}
         </nav>
 
         {/* ── Hero ── */}
-        <section style={{ maxWidth: 1200, margin: "0 auto", padding: "88px 24px 72px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
+        <section style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6 py-12 sm:py-16 md:py-20 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>
-              <div className="badge-pill fade-1" style={{ marginBottom: 20 }}>
+              <div className="badge-pill fade-1 inline-flex items-center gap-2 mb-4 sm:mb-5">
                 <Zap size={11} /> Free · ATS-Optimized · No Sign Up
               </div>
-              <h1 className="fade-2" style={{ fontSize: "clamp(2.2rem, 3.5vw, 3.2rem)", fontWeight: 800, color: "#111827", lineHeight: 1.13, letterSpacing: "-0.03em", marginBottom: 18 }}>
+              <h1 className="fade-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-5" style={{ color: "#111827", letterSpacing: "-0.03em" }}>
                 Build Resumes That<br />
                 <span style={{ color: "#ea580c" }}>Actually Get You Hired</span>
               </h1>
-              <p className="fade-3" style={{ color: "#6b7280", fontSize: "1.05rem", lineHeight: 1.7, marginBottom: 32, maxWidth: 430 }}>
+              <p className="fade-3 text-base sm:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 max-w-xl" style={{ color: "#6b7280" }}>
                 Create modern, ATS-friendly resumes with live preview and instant PDF export. Professional templates, zero hassle.
               </p>
-              <div className="fade-4" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
-                <Link to="/templates" className="btn-primary">
+              <div className="fade-4 flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <Link to="/templates" className="btn-primary text-center justify-center">
                   Build My Resume <ArrowRight size={15} />
                 </Link>
-                <Link to="/templates" className="btn-secondary">
+                <Link to="/templates" className="btn-secondary text-center justify-center">
                   Explore Templates
                 </Link>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-5">
                 {["No account needed", "PDF in 1 click", "100% free"].map(t => (
-                  <div key={t} style={{ display: "flex", alignItems: "center", gap: 5, color: "#9ca3af", fontSize: "0.8rem" }}>
+                  <div key={t} className="flex items-center gap-1.5 text-xs sm:text-sm" style={{ color: "#9ca3af" }}>
                     <CheckCircle size={13} color="#22c55e" />
                     {t}
                   </div>
@@ -234,7 +265,7 @@ export function LandingPage() {
             </div>
 
             {/* Hero visual */}
-            <div className="float" style={{ position: "relative" }}>
+            <div className="float relative hidden lg:block">
               <div style={{
                 background: "linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%)",
                 borderRadius: 20,
@@ -284,16 +315,16 @@ export function LandingPage() {
         <div className="divider" />
 
         {/* ── Stats ── */}
-        <section style={{ maxWidth: 1200, margin: "0 auto", padding: "56px 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
+        <section style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6 py-10 sm:py-14 md:py-16">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {[
               { value: "6+", label: "Resume Templates" },
               { value: "1-Click", label: "PDF Export" },
               { value: "100%", label: "ATS Compatible" },
             ].map(({ value, label }) => (
               <div key={label} className="stat-card">
-                <div style={{ fontSize: "1.9rem", fontWeight: 800, color: "#ea580c", marginBottom: 4, letterSpacing: "-0.02em" }}>{value}</div>
-                <div style={{ color: "#6b7280", fontSize: "0.875rem", fontWeight: 500 }}>{label}</div>
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2" style={{ color: "#ea580c", letterSpacing: "-0.02em" }}>{value}</div>
+                <div className="text-xs sm:text-sm md:text-base font-medium" style={{ color: "#6b7280" }}>{label}</div>
               </div>
             ))}
           </div>
@@ -302,17 +333,17 @@ export function LandingPage() {
         <div className="divider" />
 
         {/* ── Features ── */}
-        <section id="features" style={{ maxWidth: 1200, margin: "0 auto", padding: "72px 24px" }}>
-          <div style={{ marginBottom: 48 }}>
+        <section id="features" style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+          <div className="mb-10 sm:mb-14 text-center sm:text-left">
             <div className="section-tag">Why us</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 2.5vw, 2.3rem)", fontWeight: 800, color: "#111827", letterSpacing: "-0.025em", marginBottom: 10 }}>
-              Everything you need,<br />nothing you don't
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style={{ color: "#111827", letterSpacing: "-0.025em" }}>
+              Everything you need,<br className="hidden sm:inline" /> nothing you don't
             </h2>
-            <p style={{ color: "#6b7280", fontSize: "1rem", maxWidth: 400 }}>
+            <p className="text-sm sm:text-base md:text-lg max-w-xl mx-auto sm:mx-0" style={{ color: "#6b7280" }}>
               A focused set of tools built to help you land interviews faster.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
             {[
               { icon: <Eye size={20} />, title: "Live Preview", desc: "See every change reflected instantly. Edit with confidence — what you see is exactly what gets exported." },
               { icon: <Shield size={20} />, title: "ATS-Optimized", desc: "All templates pass modern Applicant Tracking Systems. Clean structure, correct formatting, every time." },
@@ -335,12 +366,12 @@ export function LandingPage() {
         <div className="divider" />
 
         {/* ── Templates ── */}
-        <section style={{ background: "#fafafa", padding: "72px 0" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 40, flexWrap: "wrap", gap: 16 }}>
+        <section style={{ background: "#fafafa" }} className="py-12 sm:py-16 md:py-20">
+          <div style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 sm:mb-10 gap-4">
               <div>
                 <div className="section-tag">Templates</div>
-                <h2 style={{ fontSize: "clamp(1.7rem, 2.5vw, 2.3rem)", fontWeight: 800, color: "#111827", letterSpacing: "-0.025em" }}>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: "#111827", letterSpacing: "-0.025em" }}>
                   Pick your style
                 </h2>
               </div>
@@ -348,7 +379,7 @@ export function LandingPage() {
                 View All <ArrowRight size={14} />
               </Link>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, marginBottom: 0 }}>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
               {[
                 { label: "Modern", accent: "#ea580c" },
                 { label: "Minimal", accent: "#2563eb" },
@@ -384,53 +415,52 @@ export function LandingPage() {
         </section>
 
         {/* ── SkillDzire Brand Strip ── */}
-        <section style={{ borderTop: "1px solid #f3f4f6", borderBottom: "1px solid #f3f4f6", background: "white", padding: "36px 24px" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
+        <section style={{ borderTop: "1px solid #f3f4f6", borderBottom: "1px solid #f3f4f6", background: "white" }} className="py-8 sm:py-10 md:py-12">
+          <div style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-center sm:text-left">
             <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#d1d5db" }}>Powered by</span>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <img src={logo} alt="SkillDzire" style={{ height: 38, width: "auto", objectFit: "contain" }} />
+              <img src={logo} alt="SkillDzire" className="h-8 sm:h-10 w-auto object-contain" />
               <div>
                 <div style={{ fontWeight: 800, fontSize: "1rem", color: "#111827" }}>SkillDzire</div>
                 <div style={{ fontSize: "0.72rem", color: "#9ca3af", fontWeight: 500 }}>Industry-ready career platform</div>
               </div>
             </div>
-            <div style={{ width: 1, height: 36, background: "#f3f4f6" }} />
-            <p style={{ color: "#9ca3af", fontSize: "0.85rem", maxWidth: 340, lineHeight: 1.55 }}>
+            <div className="hidden lg:block" style={{ width: 1, height: 36, background: "#f3f4f6" }} />
+            <p style={{ color: "#9ca3af", fontSize: "0.85rem", lineHeight: 1.55 }} className="max-w-xs lg:max-w-sm">
               Helping students build industry-ready careers through modern learning and professional development.
             </p>
           </div>
         </section>
 
         {/* ── CTA ── */}
-        <section style={{ maxWidth: 1200, margin: "0 auto", padding: "72px 24px" }}>
+        <section style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6 py-12 sm:py-16 md:py-20">
           <div style={{
             background: "linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%)",
             border: "1.5px solid #fed7aa",
             borderRadius: 20,
-            padding: "56px 48px",
             textAlign: "center",
             position: "relative",
             overflow: "hidden",
-          }}>
+          }} className="p-8 sm:p-12 md:p-16">
             <div style={{ position: "absolute", top: -40, right: -40, width: 180, height: 180, background: "rgba(234,88,12,0.06)", borderRadius: "50%", filter: "blur(30px)", pointerEvents: "none" }} />
             <div className="section-tag" style={{ marginBottom: 14 }}>Get started free</div>
-            <h2 style={{ fontSize: "clamp(1.7rem, 2.5vw, 2.3rem)", fontWeight: 800, color: "#111827", letterSpacing: "-0.025em", marginBottom: 12 }}>
-              Your next job starts with<br />a great resume
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4" style={{ color: "#111827", letterSpacing: "-0.025em" }}>
+              Your next job starts with<br className="hidden sm:inline" /> a great resume
             </h2>
-            <p style={{ color: "#6b7280", fontSize: "1rem", marginBottom: 32 }}>
+            <p style={{ color: "#6b7280" }} className="text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-xl mx-auto">
               No sign up. No credit card. Just a professional resume in minutes.
             </p>
-            <Link to="/templates" className="btn-primary" style={{ fontSize: "1rem", padding: "14px 36px" }}>
+            <Link to="/templates" className="btn-primary" style={{ fontSize: "1rem" }}>
               Build My Resume — It's Free <ArrowRight size={16} />
             </Link>
           </div>
         </section>
 
         {/* ── Footer ── */}
-        <footer style={{ background: "#111827", padding: "52px 24px 28px" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 44 }}>
-              <div>
+        <footer style={{ background: "#111827" }} className="py-10 sm:py-12 md:py-16">
+          <div style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 sm:mb-12">
+              <div className="sm:col-span-2 lg:col-span-1">
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
                   <div style={{ width: 1, height: 16, background: "rgba(255,255,255,0.12)" }} />
                   <span style={{ fontWeight: 700, fontSize: "0.875rem", color: "white" }}>Resume Builder</span>
@@ -465,8 +495,8 @@ export function LandingPage() {
               ))}
             </div>
             <div style={{ height: 1, background: "rgba(255,255,255,0.06)", marginBottom: 24 }} />
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-              <p style={{ color: "#4b5563", fontSize: "0.8rem" }}>© 2026 AI Resume Builder · A SkillDzire Product. All rights reserved.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <p style={{ color: "#4b5563" }} className="text-xs sm:text-sm">© 2026 AI Resume Builder · A SkillDzire Product. All rights reserved.</p>
               <span className="ats-pill">ATS Optimized</span>
             </div>
           </div>

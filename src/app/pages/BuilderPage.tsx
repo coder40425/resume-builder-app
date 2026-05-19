@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Link, useParams } from "react-router";
-import { FileText, Download, ChevronLeft, ZoomIn, ZoomOut } from "lucide-react";
+import { FileText, Download, ChevronLeft, ZoomIn, ZoomOut, Edit3, Eye } from "lucide-react";
 import { ResumeProvider, useResume } from "../store/resumeStore";
 import { ResumeForm } from "../components/ResumeForm";
 import { ResumePreview } from "../components/ResumePreview";
@@ -17,8 +17,9 @@ export function BuilderPage() {
 function BuilderContent() {
   const { templateId } = useParams<{ templateId: string }>();
   const [selectedTemplate, setSelectedTemplate] = useState(templateId || "modern-professional");
-  const [zoom, setZoom] = useState(0.8);
+  const [zoom, setZoom] = useState(0.75);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit"); // For mobile tabs
   const previewRef = useRef<HTMLDivElement>(null);
   const { resumeData } = useResume();
 
@@ -125,28 +126,28 @@ function BuilderContent() {
   return (
     <div className="h-screen flex flex-col bg-white">
       {/* Top Navbar */}
-      <nav className="border-b border-gray-200 bg-white z-10">
-        <div className="px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/" className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-orange-600" />
-              <span className="font-semibold text-gray-900">AI Resume Builder</span>
+      <nav className="border-b border-gray-200 bg-white z-10 flex-shrink-0">
+        <div className="px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+            <Link to="/" className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+              <span className="hidden sm:inline font-semibold text-gray-900 text-sm md:text-base">AI Resume Builder</span>
             </Link>
-            <span className="text-gray-300">|</span>
+            <span className="hidden sm:inline text-gray-300">|</span>
             <Link
               to="/templates"
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="hidden sm:flex items-center gap-1.5 text-gray-600 hover:text-gray-900 transition-colors text-xs md:text-sm"
             >
-              <ChevronLeft className="w-4 h-4" />
-              <span className="text-sm">Change Template</span>
+              <ChevronLeft className="w-3 h-3 md:w-4 md:h-4" />
+              <span>Change Template</span>
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <select
               value={selectedTemplate}
               onChange={(e) => setSelectedTemplate(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="hidden sm:block px-2 md:px-3 py-1.5 md:py-2 border border-gray-300 rounded-lg text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             >
               {templates.map((t) => (
                 <option key={t.id} value={t.id}>
@@ -158,61 +159,106 @@ function BuilderContent() {
             <button
               onClick={handleDownloadPDF}
               disabled={isDownloading}
-              className="bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 text-white px-4 py-2 rounded-lg transition-colors font-medium text-sm flex items-center gap-2"
+              className="bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-colors font-medium text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 flex-shrink-0"
             >
-              <Download className="w-4 h-4" />
-              {isDownloading ? "Preparing..." : "Download PDF"}
+              <Download className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isDownloading ? "Preparing..." : "Download PDF"}</span>
+              <span className="sm:hidden">PDF</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Template Selector */}
+        <div className="sm:hidden px-3 pb-3">
+          <select
+            value={selectedTemplate}
+            onChange={(e) => setSelectedTemplate(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          >
+            {templates.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Mobile Tabs */}
+        <div className="lg:hidden border-t border-gray-200">
+          <div className="flex">
+            <button
+              onClick={() => setActiveTab("edit")}
+              className={`flex-1 py-3 text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+                activeTab === "edit"
+                  ? "text-orange-600 border-b-2 border-orange-600 bg-orange-50"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              <Edit3 className="w-4 h-4" />
+              Edit
+            </button>
+            <button
+              onClick={() => setActiveTab("preview")}
+              className={`flex-1 py-3 text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+                activeTab === "preview"
+                  ? "text-orange-600 border-b-2 border-orange-600 bg-orange-50"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              <Eye className="w-4 h-4" />
+              Preview
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Main Content - Split Layout */}
+      {/* Main Content - Responsive Layout */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left Panel - Form */}
-        <div className="w-1/2 overflow-y-auto border-r border-gray-200 bg-gray-50">
+        {/* Left Panel - Form (Desktop: always visible, Mobile: conditional) */}
+        <div className={`lg:w-1/2 overflow-y-auto border-r border-gray-200 bg-gray-50 ${activeTab === "edit" ? "flex-1 lg:flex-none" : "hidden lg:block"}`}>
           <ResumeForm />
         </div>
 
-        {/* Right Panel - Live Preview */}
-        <div className="w-1/2 overflow-y-auto bg-gray-100 p-8">
-          <div className="mb-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setZoom(Math.max(0.5, zoom - 0.1))}
-                className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
-                title="Zoom Out"
-              >
-                <ZoomOut className="w-4 h-4 text-gray-600" />
-              </button>
-              <span className="text-sm text-gray-600 min-w-[60px] text-center">
-                {Math.round(zoom * 100)}%
-              </span>
-              <button
-                onClick={() => setZoom(Math.min(1.5, zoom + 0.1))}
-                className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
-                title="Zoom In"
-              >
-                <ZoomIn className="w-4 h-4 text-gray-600" />
-              </button>
+        {/* Right Panel - Live Preview (Desktop: always visible, Mobile: conditional) */}
+        <div className={`lg:w-1/2 overflow-y-auto bg-gray-100 ${activeTab === "preview" ? "flex-1 lg:flex-none" : "hidden lg:block"}`}>
+          <div className="p-4 sm:p-6 md:p-8">
+            <div className="mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setZoom(Math.max(0.5, zoom - 0.1))}
+                  className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                  title="Zoom Out"
+                >
+                  <ZoomOut className="w-4 h-4 text-gray-600" />
+                </button>
+                <span className="text-sm text-gray-600 min-w-[60px] text-center">
+                  {Math.round(zoom * 100)}%
+                </span>
+                <button
+                  onClick={() => setZoom(Math.min(1.5, zoom + 0.1))}
+                  className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                  title="Zoom In"
+                >
+                  <ZoomIn className="w-4 h-4 text-gray-600" />
+                </button>
+              </div>
+              <div className="text-sm text-gray-500">
+                Template: <span className="font-medium text-gray-700">{template?.name}</span>
+              </div>
             </div>
-            <div className="text-sm text-gray-500">
-              Template:{" "}
-              <span className="font-medium text-gray-700">{template?.name}</span>
-            </div>
-          </div>
 
-          <div className="overflow-auto">
-            <div
-              className="origin-top transition-transform duration-200"
-              style={{ transform: `scale(${zoom})`, width: "fit-content" }}
-            >
-              <div ref={previewRef}>
-                <ResumePreview templateId={selectedTemplate} />
+            <div className="overflow-auto">
+              <div
+                className="origin-top transition-transform duration-200"
+                style={{ transform: `scale(${zoom})`, width: "fit-content", margin: "0 auto" }}
+              >
+                <div ref={previewRef}>
+                  <ResumePreview templateId={selectedTemplate} />
+                </div>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );
