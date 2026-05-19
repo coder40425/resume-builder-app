@@ -185,29 +185,24 @@ export function LandingPage() {
           boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
         }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            {/* Logo */}
             <Link to="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
               <img src={logo} alt="SkillDzire" className="h-8 sm:h-10 w-auto object-contain" />
               <div className="hidden sm:block" style={{ width: 1, height: 20, background: "#e5e7eb", margin: "0 4px" }} />
               <span className="hidden sm:inline" style={{ fontWeight: 700, fontSize: "0.95rem", color: "#111827" }}>Resume Builder</span>
             </Link>
 
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="nav-link">Features</a>
               <Link to="/templates" className="nav-link">Templates</Link>
               <a href="#about" className="nav-link">About</a>
             </div>
 
-            {/* CTA + Mobile Menu */}
             <div className="flex items-center gap-3">
               <Link to="/templates" className="btn-primary hidden sm:inline-flex" style={{ padding: "9px 20px", fontSize: "0.85rem" }}>
                 <span className="hidden sm:inline">Build Resume</span>
                 <span className="sm:hidden">Start</span>
                 <ArrowRight size={14} />
               </Link>
-
-              {/* Mobile menu button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
@@ -217,7 +212,6 @@ export function LandingPage() {
             </div>
           </div>
 
-          {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
             <div className="md:hidden border-t border-gray-200 bg-white">
               <div className="px-4 py-4 space-y-3">
@@ -273,7 +267,6 @@ export function LandingPage() {
                 boxShadow: "0 20px 60px rgba(234,88,12,0.12), 0 4px 12px rgba(0,0,0,0.06)",
                 border: "1.5px solid #fed7aa",
               }}>
-                {/* Mock resume */}
                 <div style={{ background: "white", borderRadius: 12, padding: 24, boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
                     <div style={{ width: 44, height: 44, borderRadius: "50%", background: "linear-gradient(135deg,#ea580c,#f97316)", flexShrink: 0 }} />
@@ -297,7 +290,6 @@ export function LandingPage() {
                   </div>
                 </div>
               </div>
-              {/* Floating badge */}
               <div style={{
                 position: "absolute", bottom: -14, right: -14,
                 background: "linear-gradient(135deg,#ea580c,#f97316)",
@@ -379,25 +371,17 @@ export function LandingPage() {
                 View All <ArrowRight size={14} />
               </Link>
             </div>
+
+            {/* ── UPDATED: Real template previews ── */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
               {[
-                { label: "Modern", accent: "#ea580c" },
-                { label: "Minimal", accent: "#2563eb" },
-                { label: "Executive", accent: "#7c3aed" },
-              ].map(({ label, accent }) => (
-                <div key={label} className="template-card">
-                  <div style={{ aspectRatio: "8.5/11", padding: 24, display: "flex", flexDirection: "column", gap: 10, position: "relative", background: "white" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <div style={{ width: 32, height: 32, borderRadius: "50%", background: accent, opacity: 0.85 }} />
-                      <div>
-                        <div style={{ height: 7, background: "#e5e7eb", borderRadius: 4, width: 80, marginBottom: 4 }} />
-                        <div style={{ height: 5, background: "#f3f4f6", borderRadius: 3, width: 55 }} />
-                      </div>
-                    </div>
-                    <div style={{ height: 2, background: accent, opacity: 0.35, borderRadius: 1 }} />
-                    {[90, 75, 60, 82, 55].map((w, i) => <div key={i} style={{ height: 4, background: "#f3f4f6", borderRadius: 3, width: `${w}%` }} />)}
-                    <div style={{ height: 6, background: "#e5e7eb", borderRadius: 3, width: 60, marginTop: 4 }} />
-                    {[80, 65].map((w, i) => <div key={i} style={{ height: 4, background: "#f3f4f6", borderRadius: 3, width: `${w}%` }} />)}
+                { id: "modern-professional", label: "Modern Professional", accent: "#ea580c" },
+                { id: "ats-classic",         label: "ATS Classic",         accent: "#374151" },
+                { id: "creative-clean",      label: "Creative Clean",      accent: "#f97316" },
+              ].map(({ id, label, accent }) => (
+                <div key={id} className="template-card">
+                  <div style={{ aspectRatio: "8.5/11", position: "relative", background: "white", overflow: "hidden" }}>
+                    <TemplatePreview templateId={id} />
                     <div style={{ position: "absolute", top: 12, right: 12 }}>
                       <span className="ats-pill">ATS ✓</span>
                     </div>
@@ -503,6 +487,128 @@ export function LandingPage() {
         </footer>
 
       </div>
+    </div>
+  );
+}
+
+function TemplatePreview({ templateId }: { templateId: string }) {
+  const previewStyles: Record<string, React.ReactNode> = {
+    "modern-professional": <ModernProfessionalPreview />,
+    "ats-classic": <ATSClassicPreview />,
+    "creative-clean": <CreativeCleanPreview />,
+  };
+  return (
+    <div className="w-full h-full overflow-hidden bg-white">
+      {previewStyles[templateId] || <DefaultPreview />}
+    </div>
+  );
+}
+
+function ModernProfessionalPreview() {
+  return (
+    <div className="w-full h-full bg-white flex">
+      <div className="w-2/5 bg-slate-800 p-3 flex flex-col gap-2">
+        <div className="w-12 h-12 bg-slate-600 rounded-full mx-auto mt-2 mb-1" />
+        <div className="h-2 bg-slate-500 rounded w-3/4 mx-auto" />
+        <div className="h-1.5 bg-slate-600 rounded w-2/3 mx-auto" />
+        <div className="mt-3 space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-2/3" />
+          <div className="h-1 bg-slate-600 rounded" />
+          <div className="h-1 bg-slate-600 rounded w-5/6" />
+          <div className="h-1 bg-slate-600 rounded w-4/6" />
+        </div>
+        <div className="mt-3 space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-2/3" />
+          <div className="h-1 bg-slate-600 rounded w-full" />
+          <div className="h-1 bg-slate-600 rounded w-5/6" />
+        </div>
+        <div className="mt-3 space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-1/2" />
+          <div className="flex flex-wrap gap-1">
+            <div className="h-2 bg-slate-600 rounded px-2 w-8" />
+            <div className="h-2 bg-slate-600 rounded px-2 w-6" />
+            <div className="h-2 bg-slate-600 rounded px-2 w-10" />
+          </div>
+        </div>
+      </div>
+      <div className="flex-1 p-3 flex flex-col gap-3">
+        <div className="space-y-1">
+          <div className="h-2.5 bg-gray-800 rounded w-3/4" />
+          <div className="h-1.5 bg-orange-500 rounded w-1/2" />
+          <div className="h-1 bg-gray-300 rounded w-2/3" />
+        </div>
+        <div className="space-y-1">
+          <div className="h-1.5 bg-gray-700 rounded w-1/3 border-b border-orange-400 pb-0.5" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-11/12" />
+          <div className="h-1 bg-gray-200 rounded w-4/5" />
+        </div>
+        <div className="space-y-1">
+          <div className="h-1.5 bg-gray-700 rounded w-1/3" />
+          <div className="h-1 bg-gray-200 rounded w-3/4" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-5/6" />
+          <div className="h-1 bg-gray-200 rounded w-4/5" />
+        </div>
+        <div className="space-y-1">
+          <div className="h-1.5 bg-gray-700 rounded w-1/3" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-11/12" />
+          <div className="h-1 bg-gray-200 rounded w-3/4" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ATSClassicPreview() {
+  return (
+    <div className="w-full h-full bg-white p-4 flex flex-col gap-3">
+      <div className="text-center border-b-2 border-gray-800 pb-3">
+        <div className="h-3 bg-gray-800 rounded w-1/2 mx-auto mb-1.5" />
+        <div className="h-1.5 bg-gray-500 rounded w-2/3 mx-auto mb-1" />
+        <div className="h-1 bg-gray-400 rounded w-1/2 mx-auto" />
+      </div>
+      {["EXPERIENCE", "EDUCATION", "SKILLS"].map((section) => (
+        <div key={section} className="space-y-1.5">
+          <div className="h-1.5 bg-gray-800 rounded w-1/3 border-b border-gray-400 pb-0.5" />
+          <div className="h-1 bg-gray-300 rounded" />
+          <div className="h-1 bg-gray-300 rounded w-11/12" />
+          <div className="h-1 bg-gray-300 rounded w-4/5" />
+          <div className="h-1 bg-gray-300 rounded w-5/6" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CreativeCleanPreview() {
+  return (
+    <div className="w-full h-full bg-white p-4 flex flex-col gap-3">
+      <div className="flex items-start gap-3 pb-3" style={{ borderBottom: "2px solid #f97316" }}>
+        <div className="w-14 h-14 rounded-lg flex-shrink-0" style={{ background: "linear-gradient(135deg, #ea580c, #f97316)" }} />
+        <div className="flex-1 space-y-1">
+          <div className="h-3 bg-gray-900 rounded w-3/4" />
+          <div className="h-1.5 bg-orange-500 rounded w-1/2" />
+          <div className="h-1 bg-gray-400 rounded w-2/3" />
+        </div>
+      </div>
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="space-y-1.5">
+          <div className="h-1.5 bg-orange-500 rounded w-1/4" />
+          <div className="h-1 bg-gray-200 rounded" />
+          <div className="h-1 bg-gray-200 rounded w-11/12" />
+          <div className="h-1 bg-gray-200 rounded w-4/5" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DefaultPreview() {
+  return (
+    <div className="w-full h-full bg-white p-4 flex items-center justify-center">
+      <FileText className="w-16 h-16 text-gray-300" />
     </div>
   );
 }
