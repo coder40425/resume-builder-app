@@ -319,7 +319,7 @@ export function LandingPage() {
         <section style={{ maxWidth: 1200, margin: "0 auto" }} className="px-4 sm:px-6 py-10 sm:py-14 md:py-16">
           <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {[
-              { value: "6+", label: "Resume Templates" },
+              { value: "8+", label: "Resume Templates" },
               { value: "1-Click", label: "PDF Export" },
               { value: "100%", label: "ATS Compatible" },
             ].map(({ value, label }) => (

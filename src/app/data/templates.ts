@@ -48,5 +48,21 @@ export const templates: Template[] = [
     category: "Creative",
     atsOptimized: true,
     thumbnail: "creative-clean"
+  },
+  {
+    id: "finance-professional",
+    name: "Finance Professional",
+    description: "Student-focused layout for finance and business roles",
+    category: "Finance",
+    atsOptimized: true,
+    thumbnail: "finance-professional"
+  },
+  {
+    id: "business-analyst",
+    name: "Business Analyst",
+    description: "Commerce-focused template with emphasis on projects",
+    category: "Business",
+    atsOptimized: true,
+    thumbnail: "business-analyst"
   }
 ];

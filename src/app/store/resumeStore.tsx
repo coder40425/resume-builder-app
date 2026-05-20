@@ -4,6 +4,7 @@ import { sampleResumeData } from "../data/sampleResume";
 
 interface ResumeContextType {
   resumeData: ResumeData;
+  setResumeData: (data: ResumeData) => void;
   updateResumeData: (data: Partial<ResumeData>) => void;
   updatePersonalInfo: (info: Partial<ResumeData["personalInfo"]>) => void;
   updateEducation: (index: number, data: Partial<ResumeData["education"][0]>) => void;
@@ -28,8 +29,13 @@ interface ResumeContextType {
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 
-export function ResumeProvider({ children }: { children: ReactNode }) {
-  const [resumeData, setResumeData] = useState<ResumeData>(sampleResumeData);
+interface ResumeProviderProps {
+  children: ReactNode;
+  initialData?: ResumeData;
+}
+
+export function ResumeProvider({ children, initialData }: ResumeProviderProps) {
+  const [resumeData, setResumeData] = useState<ResumeData>(initialData ?? sampleResumeData);
 
   const updateResumeData = (data: Partial<ResumeData>) => {
     setResumeData((prev) => ({ ...prev, ...data }));
@@ -54,25 +60,13 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       ...prev,
       education: [
         ...prev.education,
-        {
-          id: `edu${Date.now()}`,
-          degree: "",
-          institution: "",
-          location: "",
-          startDate: "",
-          endDate: "",
-          gpa: "",
-          description: ""
-        }
+        { id: `edu${Date.now()}`, degree: "", institution: "", location: "", startDate: "", endDate: "", gpa: "", description: "" }
       ]
     }));
   };
 
   const removeEducation = (index: number) => {
-    setResumeData((prev) => ({
-      ...prev,
-      education: prev.education.filter((_, i) => i !== index)
-    }));
+    setResumeData((prev) => ({ ...prev, education: prev.education.filter((_, i) => i !== index) }));
   };
 
   const updateExperience = (index: number, data: Partial<ResumeData["experience"][0]>) => {
@@ -87,25 +81,13 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       ...prev,
       experience: [
         ...prev.experience,
-        {
-          id: `exp${Date.now()}`,
-          title: "",
-          company: "",
-          location: "",
-          startDate: "",
-          endDate: "",
-          current: false,
-          description: []
-        }
+        { id: `exp${Date.now()}`, title: "", company: "", location: "", startDate: "", endDate: "", current: false, description: [] }
       ]
     }));
   };
 
   const removeExperience = (index: number) => {
-    setResumeData((prev) => ({
-      ...prev,
-      experience: prev.experience.filter((_, i) => i !== index)
-    }));
+    setResumeData((prev) => ({ ...prev, experience: prev.experience.filter((_, i) => i !== index) }));
   };
 
   const updateProject = (index: number, data: Partial<ResumeData["projects"][0]>) => {
@@ -120,22 +102,13 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       ...prev,
       projects: [
         ...prev.projects,
-        {
-          id: `proj${Date.now()}`,
-          name: "",
-          description: "",
-          technologies: [],
-          link: ""
-        }
+        { id: `proj${Date.now()}`, name: "", description: "", technologies: [], link: "" }
       ]
     }));
   };
 
   const removeProject = (index: number) => {
-    setResumeData((prev) => ({
-      ...prev,
-      projects: prev.projects.filter((_, i) => i !== index)
-    }));
+    setResumeData((prev) => ({ ...prev, projects: prev.projects.filter((_, i) => i !== index) }));
   };
 
   const updateSkill = (index: number, data: Partial<ResumeData["skills"][0]>) => {
@@ -146,23 +119,11 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
   };
 
   const addSkill = () => {
-    setResumeData((prev) => ({
-      ...prev,
-      skills: [
-        ...prev.skills,
-        {
-          category: "",
-          items: []
-        }
-      ]
-    }));
+    setResumeData((prev) => ({ ...prev, skills: [...prev.skills, { category: "", items: [] }] }));
   };
 
   const removeSkill = (index: number) => {
-    setResumeData((prev) => ({
-      ...prev,
-      skills: prev.skills.filter((_, i) => i !== index)
-    }));
+    setResumeData((prev) => ({ ...prev, skills: prev.skills.filter((_, i) => i !== index) }));
   };
 
   const updateCertification = (index: number, data: Partial<ResumeData["certifications"][0]>) => {
@@ -177,22 +138,13 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
       ...prev,
       certifications: [
         ...prev.certifications,
-        {
-          id: `cert${Date.now()}`,
-          name: "",
-          issuer: "",
-          date: "",
-          credentialId: ""
-        }
+        { id: `cert${Date.now()}`, name: "", issuer: "", date: "", credentialId: "" }
       ]
     }));
   };
 
   const removeCertification = (index: number) => {
-    setResumeData((prev) => ({
-      ...prev,
-      certifications: prev.certifications.filter((_, i) => i !== index)
-    }));
+    setResumeData((prev) => ({ ...prev, certifications: prev.certifications.filter((_, i) => i !== index) }));
   };
 
   const updateAchievement = (index: number, data: Partial<ResumeData["achievements"][0]>) => {
@@ -205,28 +157,19 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
   const addAchievement = () => {
     setResumeData((prev) => ({
       ...prev,
-      achievements: [
-        ...prev.achievements,
-        {
-          id: `ach${Date.now()}`,
-          title: "",
-          description: ""
-        }
-      ]
+      achievements: [...prev.achievements, { id: `ach${Date.now()}`, title: "", description: "" }]
     }));
   };
 
   const removeAchievement = (index: number) => {
-    setResumeData((prev) => ({
-      ...prev,
-      achievements: prev.achievements.filter((_, i) => i !== index)
-    }));
+    setResumeData((prev) => ({ ...prev, achievements: prev.achievements.filter((_, i) => i !== index) }));
   };
 
   return (
     <ResumeContext.Provider
       value={{
         resumeData,
+        setResumeData,
         updateResumeData,
         updatePersonalInfo,
         updateEducation,
@@ -256,8 +199,6 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
 
 export function useResume() {
   const context = useContext(ResumeContext);
-  if (!context) {
-    throw new Error("useResume must be used within ResumeProvider");
-  }
+  if (!context) throw new Error("useResume must be used within ResumeProvider");
   return context;
 }

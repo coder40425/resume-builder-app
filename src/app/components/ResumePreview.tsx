@@ -6,6 +6,8 @@ import { MinimalElegantTemplate } from "../templates/MinimalElegantTemplate";
 import { DeveloperResumeTemplate } from "../templates/DeveloperResumeTemplate";
 import { CorporateTemplate } from "../templates/CorporateTemplate";
 import { CreativeCleanTemplate } from "../templates/CreativeCleanTemplate";
+import { FinanceProfessionalTemplate } from "../templates/FinanceProfessionalTemplate";
+import { BusinessAnalystTemplate } from "../templates/BusinessAnalystTemplate";
 
 interface ResumePreviewProps {
   templateId: string;
@@ -19,8 +21,10 @@ export const ResumePreview = forwardRef<HTMLDivElement, ResumePreviewProps>(({ t
     "ats-classic": ATSClassicTemplate,
     "minimal-elegant": MinimalElegantTemplate,
     "developer-resume": DeveloperResumeTemplate,
-    corporate: CorporateTemplate,
-    "creative-clean": CreativeCleanTemplate
+    "corporate": CorporateTemplate,
+    "creative-clean": CreativeCleanTemplate,
+    "finance-professional": FinanceProfessionalTemplate,
+    "business-analyst": BusinessAnalystTemplate,
   };
 
   const Template = templates[templateId] || ModernProfessionalTemplate;
