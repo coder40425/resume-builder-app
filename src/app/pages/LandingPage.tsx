@@ -3,6 +3,7 @@ import { FileText, Download, Eye, Zap, Shield, Layout, ArrowRight, CheckCircle, 
 import { useState } from "react";
 import logo from "../data/logo-skilldzire.png";
 import { sampleResumeData } from "../data/sampleResume";
+import { ATSUploadSection } from "../components/ATSUploadSection";
 
 type D = typeof sampleResumeData;
 
@@ -61,6 +62,28 @@ export function LandingPage() {
           border-color: #f97316;
           color: #ea580c;
           background: #fff7ed;
+        }
+
+        .btn-ats {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: white;
+          color: #ea580c;
+          padding: 12px 28px;
+          border-radius: 10px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          text-decoration: none;
+          transition: all 0.2s;
+          border: 1.5px solid #fed7aa;
+          cursor: pointer;
+        }
+        .btn-ats:hover {
+          background: #fff7ed;
+          border-color: #ea580c;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 14px rgba(234,88,12,0.15);
         }
 
         .nav-link {
@@ -203,14 +226,12 @@ export function LandingPage() {
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="nav-link">Features</a>
               <Link to="/templates" className="nav-link">Templates</Link>
-              <a href="#about" className="nav-link">About</a>
+              <a href="#ats-checker" className="nav-link">ATS Checker</a>
             </div>
 
             <div className="flex items-center gap-3">
               <Link to="/templates" className="btn-primary hidden sm:inline-flex" style={{ padding: "9px 20px", fontSize: "0.85rem" }}>
-                <span className="hidden sm:inline">Build Resume</span>
-                <span className="sm:hidden">Start</span>
-                <ArrowRight size={14} />
+                Build Resume <ArrowRight size={14} />
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -226,8 +247,8 @@ export function LandingPage() {
               <div className="px-4 py-4 space-y-3">
                 <a href="#features" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>Features</a>
                 <Link to="/templates" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>Templates</Link>
-                <a href="#about" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>About</a>
-                <Link to="/templates" className="btn-primary sm:hidden w-full justify-center" onClick={() => setMobileMenuOpen(false)}>
+                <a href="#ats-checker" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>ATS Checker</a>
+                <Link to="/templates" className="btn-primary w-full justify-center" onClick={() => setMobileMenuOpen(false)}>
                   Build Resume <ArrowRight size={14} />
                 </Link>
               </div>
@@ -249,14 +270,17 @@ export function LandingPage() {
               <p className="fade-3 text-base sm:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 max-w-xl" style={{ color: "#6b7280" }}>
                 Create modern, ATS-friendly resumes with live preview and instant PDF export. Professional templates, zero hassle.
               </p>
+
+              {/* ── CTA Buttons: Build Resume + Check ATS Score ── */}
               <div className="fade-4 flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <Link to="/templates" className="btn-primary text-center justify-center">
                   Build My Resume <ArrowRight size={15} />
                 </Link>
-                <Link to="/templates" className="btn-secondary text-center justify-center">
-                  Explore Templates
-                </Link>
+                <a href="#ats-checker" className="btn-ats text-center justify-center">
+                  <Zap size={15} /> Check ATS Score
+                </a>
               </div>
+
               <div className="flex flex-wrap items-center gap-3 sm:gap-5">
                 {["No account needed", "PDF in 1 click", "100% free"].map(t => (
                   <div key={t} className="flex items-center gap-1.5 text-xs sm:text-sm" style={{ color: "#9ca3af" }}>
@@ -347,10 +371,10 @@ export function LandingPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
             {[
               { icon: <Eye size={20} />, title: "Live Preview", desc: "See every change reflected instantly. Edit with confidence — what you see is exactly what gets exported." },
-              { icon: <Shield size={20} />, title: "ATS-Optimized", desc: "All templates pass modern Applicant Tracking Systems. Clean structure, correct formatting, every time." },
+              { icon: <Shield size={20} />, title: "ATS-Optimized Templates", desc: "All templates pass modern Applicant Tracking Systems. Clean structure, correct formatting, every time." },
               { icon: <Download size={20} />, title: "Instant PDF", desc: "One-click PDF export. No watermarks, no account, no waiting. Download and send immediately." },
-              { icon: <Layout size={20} />, title: "Pro Templates", desc: "6 thoughtfully designed templates covering every industry — tech, creative, executive, and more." },
-              { icon: <Zap size={20} />, title: "Fast & Intuitive", desc: "Pre-filled smart examples guide you. Most users complete their first resume in under 10 minutes." },
+              { icon: <Zap size={20} />, title: "Free ATS Score Checker", desc: "Upload any resume — PDF or DOCX — and get an instant AI-powered ATS score with actionable improvement tips." },
+              { icon: <Layout size={20} />, title: "Pro Templates", desc: "8 thoughtfully designed templates covering every industry — tech, finance, creative, executive, and more." },
               { icon: <FileText size={20} />, title: "No Sign Up", desc: "Start immediately. Zero registration, zero emails. Your privacy stays intact — we store nothing." },
             ].map(({ icon, title, desc }) => (
               <div key={title} className="feature-card">
@@ -363,6 +387,13 @@ export function LandingPage() {
             ))}
           </div>
         </section>
+
+        <div className="divider" />
+
+        {/* ── ATS Upload Section ── */}
+        <div id="ats-checker">
+          <ATSUploadSection />
+        </div>
 
         <div className="divider" />
 
@@ -384,11 +415,10 @@ export function LandingPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
               {[
                 { id: "modern-professional", label: "Modern Professional", accent: "#ea580c" },
-                { id: "ats-classic",         label: "ATS Classic",         accent: "#374151" },
-                { id: "creative-clean",      label: "Creative Clean",      accent: "#f97316" },
+                { id: "ats-classic", label: "ATS Classic", accent: "#374151" },
+                { id: "creative-clean", label: "Creative Clean", accent: "#f97316" },
               ].map(({ id, label, accent }) => (
                 <div key={id} className="template-card">
-                  {/* Aspect-ratio box matching letter paper 8.5:11 */}
                   <div style={{ position: "relative", width: "100%", paddingBottom: "129.41%", background: "white" }}>
                     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
                       <ScaledPreview templateId={id} />
@@ -445,9 +475,14 @@ export function LandingPage() {
             <p style={{ color: "#6b7280" }} className="text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-xl mx-auto">
               No sign up. No credit card. Just a professional resume in minutes.
             </p>
-            <Link to="/templates" className="btn-primary" style={{ fontSize: "1rem" }}>
-              Build My Resume — It's Free <ArrowRight size={16} />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <Link to="/templates" className="btn-primary" style={{ fontSize: "1rem" }}>
+                Build My Resume — It's Free <ArrowRight size={16} />
+              </Link>
+              <a href="#ats-checker" className="btn-ats" style={{ fontSize: "1rem" }}>
+                <Zap size={16} /> Check My ATS Score
+              </a>
+            </div>
           </div>
         </section>
 
@@ -465,7 +500,7 @@ export function LandingPage() {
                 </p>
               </div>
               {[
-                { heading: "Product", links: [{ label: "Templates", href: "/templates" }, { label: "Features", href: "#features" }] },
+                { heading: "Product", links: [{ label: "Templates", href: "/templates" }, { label: "ATS Checker", href: "#ats-checker" }, { label: "Features", href: "#features" }] },
                 { heading: "Company", links: [{ label: "About", href: "#about" }, { label: "Contact", href: "#contact" }] },
                 { heading: "Legal", links: [{ label: "Terms", href: "#terms" }, { label: "Privacy", href: "#privacy" }] },
               ].map(({ heading, links }) => (
@@ -502,17 +537,15 @@ export function LandingPage() {
   );
 }
 
-// ── Scaled Preview (same approach as TemplatesPage) ──────────────────────────
+// ── Scaled Preview ───────────────────────────────────────────────────────────
 
 function ScaledPreview({ templateId }: { templateId: string }) {
   const d = sampleResumeData;
-
   const inner: Record<string, React.ReactNode> = {
     "modern-professional": <ModernProfessionalStatic d={d} />,
-    "ats-classic":         <ATSClassicStatic d={d} />,
-    "creative-clean":      <CreativeCleanStatic d={d} />,
+    "ats-classic": <ATSClassicStatic d={d} />,
+    "creative-clean": <CreativeCleanStatic d={d} />,
   };
-
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
       <div
@@ -542,7 +575,6 @@ function ModernProfessionalStatic({ d }: { d: D }) {
   const { personalInfo, education, experience, projects, skills, certifications, achievements } = d;
   return (
     <div className="flex bg-white text-sm" style={{ minHeight: 1030 }}>
-      {/* Sidebar */}
       <div className="bg-slate-800 text-white p-6 flex flex-col" style={{ width: 220, flexShrink: 0 }}>
         <div className="w-20 h-20 bg-slate-600 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
           {personalInfo.fullName.split(" ").map((n: string) => n[0]).join("")}
@@ -585,8 +617,6 @@ function ModernProfessionalStatic({ d }: { d: D }) {
           </div>
         )}
       </div>
-
-      {/* Main */}
       <div className="flex-1 p-8">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{personalInfo.fullName}</h1>

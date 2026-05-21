@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router";
 import { FileText, Check, ArrowLeft, ArrowRight, Mail, Phone, MapPin, Linkedin, Github, Globe } from "lucide-react";
 import { templates } from "../data/templates";
@@ -20,6 +21,8 @@ function fmtDateMM(dateStr: string) {
 }
 
 export function TemplatesPage() {
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, []);
+
   return (
     <div className="min-h-screen bg-gray-50" style={{ fontFamily: "'Inter', sans-serif" }}>
       <style>{`
