@@ -227,6 +227,7 @@ export function LandingPage() {
               <a href="#features" className="nav-link">Features</a>
               <Link to="/templates" className="nav-link">Templates</Link>
               <a href="#ats-checker" className="nav-link">ATS Checker</a>
+              <Link to="/blog" className="nav-link">Blog</Link>
             </div>
 
             <div className="flex items-center gap-3">
@@ -248,6 +249,7 @@ export function LandingPage() {
                 <a href="#features" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>Features</a>
                 <Link to="/templates" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>Templates</Link>
                 <a href="#ats-checker" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>ATS Checker</a>
+                <Link to="/blog" className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
                 <Link to="/templates" className="btn-primary w-full justify-center" onClick={() => setMobileMenuOpen(false)}>
                   Build Resume <ArrowRight size={14} />
                 </Link>
@@ -501,8 +503,7 @@ export function LandingPage() {
               </div>
               {[
                 { heading: "Product", links: [{ label: "Templates", href: "/templates" }, { label: "ATS Checker", href: "#ats-checker" }, { label: "Features", href: "#features" }] },
-                { heading: "Company", links: [{ label: "About", href: "#about" }, { label: "Contact", href: "#contact" }] },
-                { heading: "Legal", links: [{ label: "Terms", href: "#terms" }, { label: "Privacy", href: "#privacy" }] },
+                { heading: "Company", links: [{ label: "About SkillDzire", href: "https://skilldzire.com" }, ] },
               ].map(({ heading, links }) => (
                 <div key={heading}>
                   <h4 style={{ color: "white", fontWeight: 700, fontSize: "0.875rem", marginBottom: 16 }}>{heading}</h4>
